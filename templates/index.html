@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Match Ball Possession Tracker</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: 
+                linear-gradient(180deg, rgba(0, 41, 32, 0.582) 0%, rgba(0, 24, 18, 0.8) 100%), 
+                url("{{ url_for('static', filename='images/back.jpg') }}");
+            background-size: cover; /* Ensure the image covers the entire background */
+            background-position: center; /* Center the background image */
+            color: white;
+            font-family: 'Roboto', sans-serif; /* Use Roboto for body text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent scroll bars */
+            cursor: url("{{ url_for('static', filename='images/pointer.png') }}"), auto; /* Custom cursor */
+        }
+        h2 {
+            font-size: 10rem;
+            font-family: "Bebas Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            margin-bottom: 30px;
+            mix-blend-mode: overlay; /* Change the blend mode */
+            animation: fadeIn 1s ease-in-out; /* Animation for h2 */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .upload-form {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            animation: slideIn 0.5s ease-in-out; /* Slide-in animation */
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        input[type="file"] {
+            background: rgba(34, 34, 34, 0.7);
+            border: none;
+            color: white;
+            transition: background 0.3s;
+            cursor: pointer; /* Show pointer cursor for file input */
+        }
+        input[type="file"]:hover {
+            background: rgba(34, 34, 34, 0.9);
+            transition: background 0.3s ease-in; /* Smooth transition on hover */
+        }
+        input[type="submit"] {
+            background: #28a745;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s; /* Add transform transition */
+            position: relative;
+            overflow: hidden; /* To show the loading animation properly */
+        }
+        input[type="submit"]:hover {
+            background: #218838;
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Footracker</h2>
+    <div class="upload-form">
+        <form method="post" enctype="multipart/form-data" onsubmit="showLoading()">
+            <div class="form-group">
+                <label for="videoFile">Select Video:</label>
+                <input type="file" class="form-control-file" id="videoFile" name="file" accept="video/*" required>
+            </div>
+            <input type="submit" value="Upload and Process" class="btn btn-success btn-block">
+            <div class="loading" id="loading">Processing...</div>
+        </form>
+    </div>
+    
+    <!-- Bootstrap JS (optional, for responsive behavior) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

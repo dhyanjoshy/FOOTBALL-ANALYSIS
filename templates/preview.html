@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processed Video Preview</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        body {
+            background: 
+                linear-gradient(180deg, rgba(0, 41, 32, 0.582) 0%, rgba(0, 24, 18, 0.8) 100%), 
+                url("{{ url_for('static', filename='images/back.jpg') }}");
+            background-size: cover; /* Ensure the image covers the entire background */
+            background-position: center; /* Center the background image */
+            color: white;
+            font-family: 'Roboto', sans-serif; /* Use Roboto for body text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            cursor: url("{{ url_for('static', filename='images/pointer.png') }}"), auto;
+        }
+        h2 {
+            font-size: 3rem; /* Smaller heading size */
+            font-family: "Bebas Neue", sans-serif;
+            font-weight: 400;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            mix-blend-mode: overlay; /* Change the blend mode */
+            animation: fadeIn 1s ease-in-out; /* Animation for h2 */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        video {
+            width: 60%; /* Set video width to 75% of the container */
+            border-radius: 10px; /* Optional: add some rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: add a shadow */
+        }
+        .download-btn {
+            background-color: #28a745; /* Bootstrap primary color */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2rem; /* Increase font size */
+            border-radius: 5px; /* Rounded corners */
+            margin-top: 20px; /* Add some space above */
+            transition: background-color 0.3s, transform 0.2s; /* Transition for hover effect */
+        }
+        .download-btn:hover {
+            background-color: #218838; /* Darker shade on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+    </style>
+</head>
+<body>
+    <h2>Processed Video Preview</h2>
+    <video controls>
+        <source src="{{ url_for('static', filename='output_videos/' + video_file) }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <br>
+    <a href="{{ url_for('download', filename=video_file) }}" class="download-btn">Download Processed Video</a>
+
+    <!-- Bootstrap JS (optional, for responsive behavior) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
